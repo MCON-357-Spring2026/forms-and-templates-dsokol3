@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+<h2>Loops Demo</h2>
 
-    {% for student in students %}
+<ul>
+{% for student in students %}
     <li>{{ loop.index }}. {{ student }}</li>
-    {% endfor %}
-
+{% endfor %}
+</ul>
 
 <p>Total students: {{ students|length }}</p>
+
 {% endblock %}

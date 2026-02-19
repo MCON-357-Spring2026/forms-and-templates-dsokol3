@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Filters Demo</h2>
+
+<p>Original name: {{ name }}</p>
+<p>Uppercase: {{ name|upper }}</p>
+<p>Lowercase: {{ name|lower }}</p>
+<p>Title case: {{ name|title }}</p>
+
+<p>Formatted number: {{ number|round(2) }}</p>
+
+{% endblock %}
