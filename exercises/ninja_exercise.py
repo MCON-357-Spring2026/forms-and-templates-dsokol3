@@ -40,6 +40,5 @@ def form_demo():
 
     return render_template("form.html", error=error, username=username)
 
-
 if __name__ == "__main__":
     app.run(host="localhost", port=5001, debug=True)

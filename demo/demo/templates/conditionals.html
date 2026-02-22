@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Conditionals Demo</h2>
+
+{% if score >= 90 %}
+    <div class="box">Grade: A</div>
+{% elif score >= 70 %}
+    <div class="box">Grade: B</div>
+{% else %}
+    <div class="box">Keep practicing!</div>
+{% endif %}
+
+{% endblock %}

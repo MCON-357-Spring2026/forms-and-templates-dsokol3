@@ -22,14 +22,15 @@ def add_student():
         name = request.form.get("name")
         grade = request.form.get("grade")
 
-        # TODO:
-        # 1. Validate name
-        # 2. Validate grade is number
-        # 3. Validate grade range 0–100
-        # 4. Add to students list as dictionary
-        # 5. Redirect to /students
-
-        pass
+        if not name or name.strip() == "":
+            error = "Name is required"
+        elif not grade or not grade.isdigit():
+            error = "Grade must be a number"
+        elif int(grade) < 0 or int(grade) > 100:
+            error = "Grade must be between 0 and 100"
+        else:
+            students.append({"name": name, "grade": int(grade)})
+            return redirect(url_for("display_students"))
 
     return render_template("add.html", error=error)
 
@@ -47,14 +48,24 @@ def display_students():
 # ---------------------------------
 @app.route("/summary")
 def summary():
-    # TODO:
-    # Calculate:
-    # - total students
-    # - average grade
-    # - highest grade
-    # - lowest grade
+    total_students = len(students)
+    average_grade = None
+    highest_grade = None
+    lowest_grade = None
 
-    return render_template("summary.html")
+    if total_students > 0:
+        grades = [student["grade"] for student in students]
+        average_grade = sum(grades) / total_students
+        highest_grade = max(grades)
+        lowest_grade = min(grades)
+
+    return render_template(
+        "summary.html",
+        total_students=total_students,
+        average_grade=average_grade,
+        highest_grade=highest_grade,
+        lowest_grade=lowest_grade
+    )
 
 
 if __name__ == "__main__":
