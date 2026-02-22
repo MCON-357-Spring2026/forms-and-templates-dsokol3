@@ -22,19 +22,14 @@ def add_student():
         name = request.form.get("name")
         grade = request.form.get("grade")
 
-        # Validate name
-        if not name:
+        if not name or name.strip() == "":
             error = "Name is required"
-        # Validate grade is number
-        if not grade or not grade.isdigit():
+        elif not grade or not grade.isdigit():
             error = "Grade must be a number"
-        # Validate grade range 0–100
         elif int(grade) < 0 or int(grade) > 100:
             error = "Grade must be between 0 and 100"
         else:
-            # Add to students list as dictionary
             students.append({"name": name, "grade": int(grade)})
-            # Redirect to /students
             return redirect(url_for("display_students"))
 
     return render_template("add.html", error=error)
